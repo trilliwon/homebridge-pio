@@ -1,0 +1,16 @@
+{
+	"bridge": {
+		"name":"Homebridge",
+		"username":"CC:22:3D:E3:CE:12",
+		"port": "49707",
+		"pin": "031-45-154"
+	},
+
+	"description": "",
+	"accessories": [ {
+		"accessory":"Stand",
+		"name":"Stand",
+		"pin":"17"
+		}
+	]
+}

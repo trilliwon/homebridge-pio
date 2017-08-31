@@ -1,24 +1,26 @@
-var gpio = require('pi-gpio');
+var Gpio = require('onoff').Gpio;
+var relay = new Gpio(17, 'out');
+
 var Service, Characteristic;
 
 module.exports = function(homebridge) {
 	    Service = homebridge.hap.Service;
 	    Characteristic = homebridge.hap.Characteristic;
-			homebridge.registerAccessory('homebridge-pi-gpio', 'Stand', GPIOAccessory);
+			console.log("homebridge API version: " + homebridge.version);
+			homebridge.registerAccessory('homebridge-pio', 'Stand', GPIOAccessory);
 }
 
 function GPIOAccessory(log, config) {
 	this.log = log;
 	this.name = config.name;
 	this.pin = config.pin;
+
 	this.switchService = new Service.Switch(this.name);
+	relay = new Gpio(this.pin, 'out');
+	if (!this.pin) throw new Error('You must provide a config value for pin.');
 
-  if (!this.pin) throw new Error('You must provide a config value for pin.');
-
-  this.service
-	  .getCharacteristic(Characteristic.On);
-		.on('get', this.getOn.bind(this))
-		.on('set', this.setOn.bind(this));
+  this.switchService.getCharacteristic(Characteristic.On).on('set', this.setSwitch.bind(this));
+	this.switchService.getCharacteristic(Characteristic.On).on('get', this.getSwitch.bind(this));
 }
 
 GPIOAccessory.prototype.getServices = function() {
@@ -26,19 +28,17 @@ GPIOAccessory.prototype.getServices = function() {
 }
 
 GPIOAccessory.prototype.setSwitch = function(on, callback) {
-  this.log("Setting Switch to " + on);
-  callback();
+  this.log("Setting " + on);
+	if (on) {
+		relay.writeSync(0);
+	} else {
+		relay.writeSync(1);
+  }
+	callback();
 }
 
-
-GPIOAccessory.prototype.getOn = function(callback) {
-
-}
-
-GPIOAccessory.prototype.setOn = function(on, callback) {
-
-}
-
-GPIOAccessory.prototype.pinAction = function(action) {
-
+GPIOAccessory.prototype.getSwitch = function(callback) {
+	var on = relay.readSync() ^ 1;
+	this.log("Get " + on);
+	callback(null, on);
 }

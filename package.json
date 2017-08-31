@@ -1,6 +1,6 @@
 {
-  "name":"homebridge-pi-gpio",
-	"version":"0.0.1",
+  "name":"homebridge-pio",
+	"version":"0.1.0",
   "description": "Homebridge plugin to raspberry-pi as HomeKit accessories",
   "license":"MIT",
 	"keywords":[
@@ -8,10 +8,10 @@
 	 ],
 	"repository": {
     "type":"git",
-		"url":"https://github.com/trilliwon/Homebridge-pi-gpio.git"
+		"url":"https://github.com/trilliwon/homebridge-pio.git"
 	},
 	"bugs": {
-		"url":"https://github.com/trilliwon/Homebridge-pi-gpio/issues"
+		"url":"https://github.com/trilliwon/homebridge-pio/issues"
 	},
 
 	"engines": {
