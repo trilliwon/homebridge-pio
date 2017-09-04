@@ -29,7 +29,11 @@ GPIOAccessory.prototype.getServices = function() {
 
 GPIOAccessory.prototype.setSwitch = function(on, callback) {
   this.log("Setting " + on);
-	relay.writeSync(on);
+	if (on) {
+    relay.writeSync(1);
+	} else {
+		relay.writeSync(0);
+	}
 	callback();
 }
 
