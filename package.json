@@ -1,6 +1,6 @@
 {
   "name":"homebridge-pio",
-	"version":"0.1.2",
+	"version":"0.1.3",
   "description": "Homebridge plugin to raspberry-pi as HomeKit accessories",
   "license":"MIT",
 	"keywords":[

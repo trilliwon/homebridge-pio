@@ -38,7 +38,7 @@ GPIOAccessory.prototype.setSwitch = function(on, callback) {
 }
 
 GPIOAccessory.prototype.getSwitch = function(callback) {
-	var on = relay.readSync() ^ 1;
-	this.log("Get " + on);
+	var on = relay.readSync();
 	callback(null, on);
+	this.log("Get " + on ^ 1);
 }
